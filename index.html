@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Media Kit — Larissa Linhares</title>
+<meta name="description" content="Media Kit oficial de Larissa Linhares — dados de audiência, alcance e conteúdo direto da API do Instagram.">
+<meta property="og:title" content="Media Kit — Larissa Linhares">
+<meta property="og:description" content="Dados oficiais de audiência e desempenho para parcerias com marcas.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ================= CONFIG ================= */
+/* Endereco do backend (Cloudflare Worker). Nao precisa mexer. */
+/* ========================================== */
+:root{
+  --bg:#ece3d8; --bg2:#ddcdb8; --bg3:#c9b49a;
+  --ink:#2b2219; --muted:#7c6d5c; --line:rgba(120,100,74,.18);
+  --accent:#7c5f42; --accent2:#a9855c; --gold:#b9975b;
+  --glass:rgba(255,252,247,.55); --glass-strong:rgba(255,252,247,.72);
+  --glass-brd:rgba(255,255,255,.65); --shadow:0 8px 34px rgba(74,57,38,.14);
+  --radius:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Manrope,system-ui,sans-serif;color:var(--ink);line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background:
+    radial-gradient(1100px 600px at 78% -8%, #f3 ece0 0%, transparent 55%),
+    radial-gradient(900px 520px at 8% 12%, rgba(185,151,91,.20) 0%, transparent 50%),
+    linear-gradient(160deg,var(--bg) 0%,var(--bg2) 60%,var(--bg3) 100%);
+  background-attachment:fixed;
+}
+.serif{font-family:Fraunces,Georgia,serif}
+.wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+section{padding:56px 0;position:relative}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);font-weight:700}
+h2.title{font-family:Fraunces,serif;font-size:32px;font-weight:600;letter-spacing:-.02em;margin:8px 0 6px}
+.sub{color:var(--muted);font-size:15px;max-width:560px}
+
+/* ---- glass primitives ---- */
+.glass{background:var(--glass);backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);
+  border:1px solid var(--glass-brd);border-radius:var(--radius);box-shadow:var(--shadow)}
+svg.ic{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.14em}
+
+/* ---- top bar ---- */
+.bar{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+  padding:12px 18px;background:rgba(236,227,216,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line)}
+.bar .brand{font-family:Fraunces,serif;font-weight:600;font-size:17px;letter-spacing:-.01em}
+.burger{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--glass);
+  border:1px solid var(--glass-brd);cursor:pointer;font-size:20px;color:var(--ink)}
+.nav{position:fixed;inset:0;z-index:50;background:rgba(43,34,25,.34);backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;transition:.25s}
+.nav.open{opacity:1;pointer-events:auto}
+.nav-panel{position:absolute;top:0;right:0;height:100%;width:min(82%,320px);background:var(--glass-strong);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-left:1px solid var(--glass-brd);
+  padding:74px 26px;transform:translateX(100%);transition:.3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:6px}
+.nav.open .nav-panel{transform:translateX(0)}
+.nav-panel a{color:var(--ink);text-decoration:none;font-family:Fraunces,serif;font-size:22px;padding:12px 0;
+  border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+.nav-close{position:absolute;top:16px;right:18px;font-size:26px;cursor:pointer;color:var(--ink);background:none;border:0}
+
+/* ---- hero / linktree top ---- */
+.hero{padding-top:60px}
+.banner{height:200px;border-radius:0 0 6px 6px;margin:0 -18px;
+  background:linear-gradient(120deg,var(--accent) 0%,var(--accent2) 55%,var(--gold) 100%);
+  background-size:cover;background-position:center;position:relative}
+.banner::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(43,34,25,.28))}
+.avatar-wrap{display:flex;justify-content:center;margin-top:-64px;position:relative;z-index:2}
+.avatar{width:128px;height:128px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,252,247,.9);
+  box-shadow:var(--shadow);background:var(--bg2)}
+.hero-info{text-align:center;padding-top:16px}
+.hero-info h1{font-family:Fraunces,serif;font-size:34px;font-weight:700;letter-spacing:-.02em}
+.hero-info .handle{color:var(--accent2);font-weight:600;margin-top:2px}
+.hero-info .bio{color:var(--ink);opacity:.85;max-width:520px;margin:14px auto 0;font-size:15.5px}
+.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.chip{font-size:12.5px;padding:7px 13px;border-radius:100px;background:var(--glass);border:1px solid var(--glass-brd);
+  color:var(--accent);font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:100px;font-weight:700;
+  font-size:14px;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#65492f}
+.btn-ghost{background:var(--glass);border-color:var(--glass-brd);color:var(--ink)}
+
+/* ---- kpi grid ---- */
+.kpis{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:720px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{padding:20px 16px}
+.kpi .ico{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;background:rgba(124,95,66,.12);
+  color:var(--accent);font-size:18px;margin-bottom:12px}
+.kpi .v{font-family:Fraunces,serif;font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1}
+.kpi .l{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-top:7px;font-weight:600}
+.kpi .brandnote{font-size:12px;color:var(--accent2);margin-top:9px;line-height:1.4}
+
+/* ---- trends ---- */
+.two{display:grid;gap:16px}@media(min-width:720px){.two{grid-template-columns:1fr 1fr}}
+.trend{padding:22px}
+.trend .h{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700;display:flex;align-items:center;gap:8px}
+.trend .big{font-family:Fraunces,serif;font-size:30px;font-weight:600;margin:6px 0 12px}
+.trend svg.spark{color:var(--accent);display:block;width:100%;height:56px}
+
+/* ---- audience ---- */
+.aud-grid{display:grid;gap:16px}@media(min-width:720px){.aud-grid{grid-template-columns:1fr 1fr}}
+.panel{padding:24px}
+.panel h3{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.bar-row{display:grid;grid-template-columns:96px 1fr 42px;align-items:center;gap:10px;margin-bottom:12px;font-size:14px;font-weight:500}
+.bar-row b{text-align:right;color:var(--accent);font-weight:700}
+.bar{height:9px;background:rgba(124,95,66,.13);border-radius:100px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:100px;background:linear-gradient(90deg,var(--accent2),var(--accent))}
+.donut-wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.legend{font-size:13.5px;font-weight:600}
+.legend div{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.legend .sw{width:12px;height:12px;border-radius:4px}
+
+/* ---- gallery ---- */
+.gallery{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:720px){.gallery{grid-template-columns:repeat(3,1fr)}}
+.card{overflow:hidden;text-decoration:none;color:inherit;display:block;transition:.18s}
+.card:hover{transform:translateY(-3px)}
+.card .img{aspect-ratio:4/5;background-size:cover;background-position:center;background-color:var(--bg2);position:relative}
+.card .tag{position:absolute;top:9px;left:9px;font-size:11px;font-weight:700;padding:4px 9px;border-radius:100px;
+  background:rgba(43,34,25,.62);color:#fff;backdrop-filter:blur(4px)}
+.card .mrow{display:flex;justify-content:space-between;gap:6px;padding:12px 13px;font-size:12.5px;color:var(--muted);font-weight:600}
+.card .mrow span{display:inline-flex;align-items:center;gap:4px}
+
+/* ---- comments ---- */
+.quotes{display:grid;gap:14px;grid-template-columns:1fr}@media(min-width:720px){.quotes{grid-template-columns:repeat(2,1fr)}}
+.quote{padding:20px 22px}
+.quote .t{font-size:15px;line-height:1.5}
+.quote .u{margin-top:12px;font-size:13px;color:var(--accent2);font-weight:700;display:flex;align-items:center;gap:7px}
+
+/* ---- about ---- */
+.about{padding:30px}
+.about p{font-size:16px;line-height:1.7;color:var(--ink);opacity:.9}
+
+/* ---- footer / source ---- */
+.source{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;color:var(--muted);font-weight:600;
+  padding:9px 15px;border-radius:100px;background:var(--glass);border:1px solid var(--glass-brd)}
+.dot{width:7px;height:7px;border-radius:50%;background:#5aa06a;display:inline-block;box-shadow:0 0 0 3px rgba(90,160,106,.2)}
+footer{text-align:center;padding:44px 0 70px;color:var(--muted);font-size:13px}
+.loading{text-align:center;padding:120px 20px;color:var(--muted)}
+.spin{width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;
+  margin:0 auto 16px;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<!-- barra fixa + hamburguer -->
+<div class="bar">
+  <span class="brand" id="barName">Media Kit</span>
+  <button class="burger" id="burger" aria-label="menu"><svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div>
+<div class="nav" id="nav">
+  <div class="nav-panel">
+    <button class="nav-close" id="navClose">&times;</button>
+    <a href="#topo"><svg class="ic" viewBox="0 0 24 24"><path d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>Início</a>
+    <a href="#numeros"><svg class="ic" viewBox="0 0 24 24"><path d="M4 19V5m5 14V9m5 10V4m5 15v-7"/></svg>Números</a>
+    <a href="#audiencia"><svg class="ic" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M17 11a3 3 0 100-6"/></svg>Audiência</a>
+    <a href="#conteudo"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18"/></svg>Conteúdo</a>
+    <a href="#sobre"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>Sobre</a>
+    <a href="#contato"><svg class="ic" viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg>Contato</a>
+  </div>
+</div>
+
+<main id="app">
+  <div class="loading"><div class="spin"></div>Carregando dados oficiais…</div>
+</main>
+
+<script>
+const API_BASE = "https://worker-larissalinhareesz-ofc.pereiranord-co.workers.dev";
+
+const nf = new Intl.NumberFormat("pt-BR");
+const num = v => (v===null||v===undefined) ? "—" : nf.format(v);
+const img = p => p ? (p.startsWith("http") ? p : API_BASE + p) : "";
+const esc = s => (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// icones SVG reutilizaveis
+const IC = {
+  users:'<svg class="ic" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M17 11a3 3 0 100-6"/></svg>',
+  eye:'<svg class="ic" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>',
+  heart:'<svg class="ic" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9.5-9C1 8 2.5 4.5 6 4.5c2 0 3.2 1.2 4 2.3.8-1.1 2-2.3 4-2.3 3.5 0 5 3.5 3.5 6.5C19 15.5 12 20 12 20z"/></svg>',
+  chat:'<svg class="ic" viewBox="0 0 24 24"><path d="M21 15a3 3 0 01-3 3H8l-5 4V6a3 3 0 013-3h12a3 3 0 013 3z"/></svg>',
+  share:'<svg class="ic" viewBox="0 0 24 24"><path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7M16 6l-4-4-4 4M12 2v14"/></svg>',
+  save:'<svg class="ic" viewBox="0 0 24 24"><path d="M6 3h12a1 1 0 011 1v17l-7-4-7 4V4a1 1 0 011-1z"/></svg>',
+  reach:'<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/></svg>',
+  bolt:'<svg class="ic" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>',
+  trend:'<svg class="ic" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>',
+  pin:'<svg class="ic" viewBox="0 0 24 24"><path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+  wa:'<svg class="ic" viewBox="0 0 24 24"><path d="M20 12a8 8 0 01-11.8 7L4 20l1-4.2A8 8 0 1120 12z"/><path d="M9 9c0 4 2 6 6 6"/></svg>',
+  mail:'<svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+  star:'<svg class="ic" viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9 6.8 19l1-5.8L3.6 9.1l5.8-.8z"/></svg>'
+};
+
+function spark(vals,w=280,h=56){
+  const p=vals.filter(v=>v!==null&&v!==undefined);
+  if(p.length<2) return '<div class="sub">coletando histórico…</div>';
+  const mn=Math.min(...p),mx=Math.max(...p),sp=(mx-mn)||1,st=w/(p.length-1);
+  const line=p.map((v,i)=>`${i?'L':'M'}${(i*st).toFixed(1)},${(h-((v-mn)/sp)*h*.86-4).toFixed(1)}`).join(' ');
+  const area=line+`L${w},${h}L0,${h}Z`;
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".22"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
+    <path d="${area}" fill="url(#g)"/><path d="${line}" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>`;
+}
+
+function donut(gender){
+  const tot=gender.reduce((a,x)=>a+x.value,0)||1;
+  const cols=['#7c5f42','#b9975b','#cdb39a'];
+  let acc=0, segs='';
+  gender.forEach((g,i)=>{const pct=g.value/tot;const a0=acc*360, a1=(acc+pct)*360;acc+=pct;
+    const r=42,cx=50,cy=50;
+    const x0=cx+r*Math.cos((a0-90)*Math.PI/180), y0=cy+r*Math.sin((a0-90)*Math.PI/180);
+    const x1=cx+r*Math.cos((a1-90)*Math.PI/180), y1=cy+r*Math.sin((a1-90)*Math.PI/180);
+    const large=pct>.5?1:0;
+    segs+=`<path d="M${cx} ${cy} L${x0.toFixed(2)} ${y0.toFixed(2)} A${r} ${r} 0 ${large} 1 ${x1.toFixed(2)} ${y1.toFixed(2)} Z" fill="${cols[i%3]}"/>`;
+  });
+  const leg=gender.map((g,i)=>{const lbl=g.label==='F'?'Feminino':g.label==='M'?'Masculino':g.label;
+    return `<div><span class="sw" style="background:${cols[i%3]}"></span>${esc(lbl)} · ${Math.round(g.value/tot*100)}%</div>`;}).join('');
+  return `<div class="donut-wrap"><svg width="120" height="120" viewBox="0 0 100 100">${segs}<circle cx="50" cy="50" r="24" fill="var(--glass-strong)"/></svg><div class="legend">${leg}</div></div>`;
+}
+
+function bars(rows,total){
+  const t=total||rows.reduce((a,x)=>a+x.value,0)||1;
+  return rows.map(r=>{const pct=Math.round(r.value/t*100);
+    return `<div class="bar-row"><span>${esc(r.label)}</span><div class="bar"><i style="width:${pct}%"></i></div><b>${pct}%</b></div>`;}).join('');
+}
+
+function kpiCard(icon,val,label,note){
+  return `<div class="glass kpi"><div class="ico">${icon}</div><div class="v">${val}</div><div class="l">${label}</div>${note?`<div class="brandnote">${note}</div>`:''}</div>`;
+}
+
+function mediaCard(m){
+  const tag=m.product==='REELS'?'Reels':(m.type==='CAROUSEL_ALBUM'?'Carrossel':'Post');
+  return `<a class="glass card" href="${esc(m.permalink)}" target="_blank" rel="noopener">
+    <div class="img" style="background-image:url('${esc(img(m.image))}')"><span class="tag">${tag}</span></div>
+    <div class="mrow"><span>${IC.eye}${num(m.views??m.reach)}</span><span>${IC.heart}${num(m.likes)}</span><span>${IC.chat}${num(m.comments)}</span></div>
+  </a>`;
+}
+
+function render(d){
+  const p=d.profile||{}, k=d.kpis||{}, a=d.audience||{}, ab=d.about||{};
+  document.getElementById('barName').textContent = p.name || p.username || 'Media Kit';
+  document.title = `Media Kit — ${p.name||p.username||''}`;
+
+  const followersSeries = spark(d.series.map(s=>s.followers));
+  const reachSeries = spark(d.series.map(s=>s.reach));
+
+  const chips=[];
+  if(ab.niche) chips.push(`<span class="chip">${IC.star}${esc(ab.niche)}</span>`);
+  if(ab.location) chips.push(`<span class="chip">${IC.pin}${esc(ab.location)}</span>`);
+  if(p.media_count) chips.push(`<span class="chip">${IC.eye}${num(p.media_count)} publicações</span>`);
+
+  const cta=[];
+  if(ab.contact_whatsapp) cta.push(`<a class="btn btn-primary" href="https://wa.me/${esc(ab.contact_whatsapp)}" target="_blank">${IC.wa} Falar no WhatsApp</a>`);
+  if(ab.contact_email) cta.push(`<a class="btn btn-ghost" href="mailto:${esc(ab.contact_email)}">${IC.mail} E-mail</a>`);
+  cta.push(`<a class="btn btn-ghost" href="https://instagram.com/${esc(p.username)}" target="_blank">Ver Instagram</a>`);
+
+  const updated = d.last_sync ? new Date(d.last_sync).toLocaleDateString('pt-BR',{timeZone:'America/Sao_Paulo'}) : '';
+
+  const cityTotal = (a.city||[]).reduce((s,x)=>s+x.value,0)||1;
+
+  const app = `
+  <div id="topo" class="hero">
+    <div class="wrap">
+      <div class="banner" style="${ab.banner?`background-image:url('${esc(img(ab.banner))}')`:''}"></div>
+      <div class="avatar-wrap">${p.avatar?`<img class="avatar" src="${esc(img(p.avatar))}" alt="${esc(p.name||'')}">`:`<div class="avatar"></div>`}</div>
+      <div class="hero-info">
+        <h1>${esc(p.name||p.username||'Larissa')}</h1>
+        <div class="handle">@${esc(p.username||'')}</div>
+        ${ab.headline?`<p class="bio serif" style="font-size:19px;font-weight:500">${esc(ab.headline)}</p>`:''}
+        ${p.biography?`<p class="bio">${esc(p.biography)}</p>`:''}
+        <div class="chips">${chips.join('')}</div>
+        <div class="cta">${cta.join('')}</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="numeros"><div class="wrap">
+    <div class="eyebrow">Panorama</div>
+    <h2 class="title serif">Os números que importam</h2>
+    <p class="sub">Cada indicador com a leitura que uma marca faz dele.</p>
+    <div class="kpis" style="margin-top:26px">
+      ${kpiCard(IC.users,num(k.followers),'Seguidores', ab.location?`Concentrados em ${esc((a.city&&a.city[0]&&a.city[0].label)||ab.location)}`:'')}
+      ${kpiCard(IC.reach,num(k.reach),'Alcance / dia', k.reach_rate?`Atinge ${k.reach_rate}% da base todo dia`:'')}
+      ${kpiCard(IC.eye,num(k.views),'Visualizações / dia', k.frequency?`Cada pessoa vê ${String(k.frequency).replace('.',',')}× em média`:'')}
+      ${kpiCard(IC.bolt,(k.engagement_over_reach!=null?k.engagement_over_reach+'%':'—'),'Engajamento', 'Sobre o alcance real — mais honesto que sobre seguidores')}
+    </div>
+    <div class="kpis" style="margin-top:14px">
+      ${kpiCard(IC.heart,num(k.likes),'Curtidas / dia','')}
+      ${kpiCard(IC.chat,num(k.comments),'Comentários / dia','Interação de alto esforço')}
+      ${kpiCard(IC.save,num(k.saves),'Salvamentos / dia','Sinal de intenção de compra')}
+      ${kpiCard(IC.share,num(k.shares),'Compartilhamentos','Alcance orgânico gratuito')}
+    </div>
+  </div></section>
+
+  <section id="desempenho"><div class="wrap">
+    <div class="eyebrow">Tendência</div>
+    <h2 class="title serif">Desempenho ao longo do tempo</h2>
+    <p class="sub">Histórico próprio, coletado diariamente da API oficial.</p>
+    <div class="two" style="margin-top:24px">
+      <div class="glass trend"><div class="h">${IC.users} Seguidores</div><div class="big serif">${num(k.followers)}</div>${followersSeries}</div>
+      <div class="glass trend"><div class="h">${IC.trend} Alcance diário</div><div class="big serif">${num(k.reach)}</div>${reachSeries}</div>
+    </div>
+  </div></section>
+
+  ${(a.gender&&a.gender.length)||(a.age&&a.age.length)||(a.city&&a.city.length)?`
+  <section id="audiencia"><div class="wrap">
+    <div class="eyebrow">Público</div>
+    <h2 class="title serif">Quem segue a Larissa</h2>
+    <p class="sub">O encaixe entre a audiência dela e o público da sua marca.</p>
+    <div class="aud-grid" style="margin-top:24px">
+      <div class="glass panel">
+        ${a.gender&&a.gender.length?`<h3>${IC.users} Gênero</h3>${donut(a.gender)}`:''}
+        ${a.age&&a.age.length?`<h3 style="margin-top:26px">${IC.bolt} Faixa etária</h3>${bars(a.age)}`:''}
+      </div>
+      <div class="glass panel">
+        ${a.city&&a.city.length?`<h3>${IC.pin} Principais cidades</h3>${bars(a.city.slice(0,7),cityTotal)}`:''}
+        ${a.country&&a.country.length>1?`<h3 style="margin-top:26px">${IC.pin} Países</h3>${bars(a.country.slice(0,4))}`:''}
+      </div>
+    </div>
+  </div></section>`:''}
+
+  <section id="conteudo"><div class="wrap">
+    <div class="eyebrow">Portfólio</div>
+    <h2 class="title serif">Conteúdos em destaque</h2>
+    <p class="sub">Os posts de maior desempenho, com resultados reais.</p>
+    ${d.top_media&&d.top_media.length?`<div class="gallery" style="margin-top:24px">${d.top_media.slice(0,9).map(mediaCard).join('')}</div>`:`<div class="glass panel" style="text-align:center;color:var(--muted)">A galeria aparece conforme a coleta avança.</div>`}
+  </div></section>
+
+  ${d.comments&&d.comments.length?`
+  <section><div class="wrap">
+    <div class="eyebrow">Prova social</div>
+    <h2 class="title serif">O que a audiência comenta</h2>
+    <div class="quotes" style="margin-top:24px">
+      ${d.comments.slice(0,4).map(c=>`<div class="glass quote"><div class="t">"${esc(c.text)}"</div><div class="u">${IC.star}@${esc(c.username)}</div></div>`).join('')}
+    </div>
+  </div></section>`:''}
+
+  ${ab.text?`
+  <section id="sobre"><div class="wrap">
+    <div class="eyebrow">Sobre</div>
+    <h2 class="title serif">Sobre mim</h2>
+    <div class="glass about" style="margin-top:20px"><p>${esc(ab.text)}</p></div>
+  </div></section>`:''}
+
+  <section id="contato"><div class="wrap" style="text-align:center">
+    <div class="eyebrow">Vamos conversar</div>
+    <h2 class="title serif">Pronta para a sua próxima campanha</h2>
+    <div class="cta" style="margin-top:18px">${cta.join('')}</div>
+  </div></section>
+
+  <footer><div class="wrap">
+    <span class="source"><span class="dot"></span>Todos os dados vêm da API oficial do Instagram${updated?` · atualizado em ${updated}`:''}</span>
+    <div style="margin-top:16px">Media Kit · @${esc(p.username||'')}</div>
+  </div></footer>`;
+
+  document.getElementById('app').innerHTML = app;
+  track();
+}
+
+function track(){
+  try{
+    const sid=Math.random().toString(36).slice(2)+Date.now().toString(36);
+    const start=Date.now(); let maxS=0;
+    addEventListener('scroll',()=>{const p=Math.round((scrollY+innerHeight)/document.body.scrollHeight*100);if(p>maxS)maxS=p;},{passive:true});
+    const send=dur=>{try{navigator.sendBeacon(API_BASE+'/api/track',JSON.stringify({session_id:sid,path:location.pathname,referrer:document.referrer,utm_source:new URLSearchParams(location.search).get('utm_source'),duration_sec:dur,max_scroll_pct:maxS}));}catch(e){}};
+    send(0); addEventListener('beforeunload',()=>send(Math.round((Date.now()-start)/1000)));
+  }catch(e){}
+}
+
+// menu hamburguer
+const nav=document.getElementById('nav');
+document.getElementById('burger').onclick=()=>nav.classList.add('open');
+document.getElementById('navClose').onclick=()=>nav.classList.remove('open');
+nav.onclick=e=>{if(e.target===nav||e.target.tagName==='A')nav.classList.remove('open');};
+
+// carrega dados
+fetch(API_BASE+'/api/kit').then(r=>r.json()).then(render).catch(e=>{
+  document.getElementById('app').innerHTML='<div class="loading">Não foi possível carregar os dados agora.<br>Tente atualizar a página em instantes.</div>';
+});
+</script>
+</body>
+</html>
